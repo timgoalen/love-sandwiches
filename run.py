@@ -1,7 +1,3 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -28,8 +24,11 @@ def get_sales_data():
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n")
 
+        data_str = input("Enter your data here: ")	
+        sales_data = data_str.split(",")
+
         if validate_data(sales_data):
-            print("Valid data!")
+            print("Data is valid!")
             break
 
     return sales_data
@@ -68,7 +67,7 @@ def validate_data(values):
 #     print("Updating surplus worksheet...\n")
 #     surplus_worksheet = SHEET.worksheet("surplus")
 #     surplus_worksheet.append_row(data)
-#     print("Surplus worksheet updated sucessfully.\n")
+#     print("Surplus worksheet updated successfully.\n")
 
 def update_worksheet(data, worksheet):
     """
@@ -78,7 +77,7 @@ def update_worksheet(data, worksheet):
     print(f"Updating {worksheet} worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print(f"{worksheet} worksheet updated sucessfully.\n")
+    print(f"{worksheet} worksheet updated successfully.\n")
 
 def calculate_surplus_data(sales_row):
     """
@@ -108,7 +107,7 @@ def get_last_5_entries_sales():
     sales = SHEET.worksheet("sales")
 
     columns = []
-    for ind in range(1,7):
+    for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
     
